@@ -1,7 +1,7 @@
 {
   "name": "tictactoe",
   "version": "0.1.0",
-  "description": "ticTacToe Game (also known as X-O Game) reference from REACT Documentation",
+  "description": "ticTacToe Game (also known as X-O Game) -reference from REACT Documentation",
   "scripts": {
     "start": "parcel index.html",
     "build": "npm run clear && parcel build index.html",
@@ -12,6 +12,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "node-sass": "^6.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
