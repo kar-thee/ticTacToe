@@ -13,7 +13,7 @@ import "./styles/style.scss";
     
     const winnerMessage = winner ? 
                   `Winner is ${winner}`
-                : `${isplayerX ? 'X' : 'O'}'s Turn '`
+                : `${isplayerX ? 'X' : 'O'}'s Turn`
     
         const clickHandler = (position) =>{
          if(winner){
