@@ -1,10 +1,9 @@
-import React,{useState} from 'react'
+import React from 'react'
 
 const History = ({history,playerX,moveTo}) => {
      // eslint-disable-next-line no-console
      console.log("History True", history)
-    //  const [player,setPlayer] = useState(playerX)
-    // {playerX ? 'X': 'O'}
+    
     
     return (
       <>
