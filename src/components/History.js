@@ -9,11 +9,21 @@ const History = ({history,moveTo}) => {
       <>
         <ul>
           {history.board.map( (elem,index) => {
-              
+              console.log(history.board.length,"this is elem in history map fun")
               return(
                 
-                <li key={index} style={{listStyle:'none',padding:'3px',textAlign:'center'}}>
-                  <button type="button" onClick={()=>(moveTo(index))}>
+                <li 
+                  key={index}
+                  style={
+                    {listStyle:'none',padding:'3px',textAlign: (index>0)?'center':''}
+                    }
+                >
+                  <button 
+                    type="button" 
+                    onClick={()=>(moveTo(index))} 
+                    style={{fontWeight:((history.board.length-1) === index) ? 'bold':''}}
+                  
+                  >
                     {
                         (index>0) ? `Move : ${index} and Played by  ${history.player[index]}` : "Initial Move"
                     }

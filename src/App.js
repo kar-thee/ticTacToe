@@ -32,7 +32,9 @@ import "./styles/style.scss";
                 : `${isplayerX ? 'X' : 'O'}'s Turn`
     
       const clickHandler = (position) =>{
-          
+          if(moveCommand){
+            return
+          } //this is to stop clicking after using timeMachine Feature(history)
          if(winner){
            return
          } // this is to stop click function after getting a Winner
