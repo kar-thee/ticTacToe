@@ -2,6 +2,7 @@ import React from "react";
 import Square from "./Square";
 
 const Board = ({boardValue,clickHandler}) =>{
+       // eslint-disable-next-line no-console
        console.log("boardValue : ",boardValue)
     const renderSquare = (position) =>{
         return(
