@@ -2,7 +2,7 @@ import React from "react";
 import Square from "./Square";
 
 const Board = ({boardValue,clickHandler}) =>{
-       
+       console.log("boardValue : ",boardValue)
     const renderSquare = (position) =>{
         return(
           <Square

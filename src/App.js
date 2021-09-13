@@ -12,11 +12,13 @@ import "./styles/style.scss";
     const [isplayerX,setPlayerX]     = useState(false)
     // eslint-disable-next-line prefer-const
     let [winner,setWinner]         = useState('')
-    const [history,setHistory] = useState([])
+    const [history,setHistory] = useState({board:[],player:[]})
+    const [moveCommand,setMoveCommand] = useState(false)
     
     // eslint-disable-next-line no-console
     const historyChanges =() =>{
-      history[count] = (boardValue)
+      history.board[count] = (boardValue)
+      history.player.push(`${!isplayerX ? 'X': 'O'}`) 
       setCounter(count+1)
       setHistory(history)
     }
@@ -49,12 +51,14 @@ import "./styles/style.scss";
                          });
          setPlayerX((prev) => !prev)             
     };
+    
+    const moveTo = (movePosition) =>{
 
-    // const moveTo = (movePosition) =>{
-    //   return(
-    //     1
-    //   )
-    // }
+        setMoveCommand(history.board[movePosition])
+        // moveToPos =  history.board[movePosition]
+        // eslint-disable-next-line no-console
+        console.log("moveToPos: ",moveCommand)      
+    }
     
   useEffect(() => {
     historyChanges()
@@ -79,8 +83,9 @@ import "./styles/style.scss";
       <h1>Tic-Tac-Toe</h1>
       {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
       <h3>{winnerMessage}</h3>
-      <Board clickHandler={clickHandler} boardValue={boardValue} />
-      <History history={history} playerX={isplayerX} moveTo={moveTo} />
+      {/* eslint-disable-next-line no-unneeded-ternary */}
+      <Board clickHandler={clickHandler} boardValue={moveCommand ?moveCommand: boardValue} />
+      <History history={history} moveTo={moveTo} />
     </div>
   );
 }
