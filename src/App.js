@@ -124,7 +124,7 @@ import "./styles/style.scss";
       <h2 style={{fontWeight:'normal'}}>
         Current Game History
       </h2>
-      
+
       <History 
         history={history}
         moveTo={moveTo}
