@@ -1,7 +1,9 @@
 import React,{useState,useEffect} from "react";
+// eslint-disable-next-line import/no-named-as-default-member
 import Board from "./components/Board";
-import Winner from "./Winner"
+import WinnerFinderFunction from "./WinnerFinderFunction"
 import History from "./components/History";
+import WinnerMsg from "./components/WinnerMsg";
 
 import "./styles/style.scss";
 
@@ -11,10 +13,10 @@ import "./styles/style.scss";
     const [boardValue,setBoardValue] = useState(Array(9).fill(null))
     const [isplayerX,setPlayerX]     = useState(false)
     // eslint-disable-next-line prefer-const
-    let [winner,setWinner]         = useState('')
+    let [winnerState,setWinnerState]         = useState('')
     const [history,setHistory] = useState({board:[],player:[]})
     const [moveCommand,setMoveCommand] = useState(false)
-    
+    const [winnerSquares,setWinnerSquares] = useState([])
     // eslint-disable-next-line no-console
     const historyChanges =() =>{
       history.board[count] = (boardValue)
@@ -27,15 +29,13 @@ import "./styles/style.scss";
                    "count",count,"length",
                       Object.keys(history).length)
 
-    const winnerMessage = winner ? 
-                  `Winner is ${winner}`
-                : `${isplayerX ? 'X' : 'O'}'s Turn`
+    
     
       const clickHandler = (position) =>{
           if(moveCommand){
             return
-          } //this is to stop clicking after using timeMachine Feature(history)
-         if(winner){
+          } // this is to stop clicking after using timeMachine Feature(history)
+         if(winnerState){
            return
          } // this is to stop click function after getting a Winner
          if(boardValue[position]){
@@ -64,19 +64,32 @@ import "./styles/style.scss";
     
   useEffect(() => {
     historyChanges()
-
-    winner = Winner(boardValue)
+    
+    const {playerName,playerIndex} = WinnerFinderFunction(boardValue)
+    // console.log(playerName,"Playername",playerIndex,"WinnerObj")
     // eslint-disable-next-line no-console
     // console.log(winner)
     // console.log("History :",history)
-    setWinner(winner)
 
+    setWinnerState(playerName)
+    setWinnerSquares(playerIndex)
     return () => {
       // eslint-disable-next-line no-console
       // console.log("boardValue unmounted")
     }
   },[boardValue])
 
+  const newGame =() =>{
+    // eslint-disable-next-line no-console
+    console.log("btn clik")
+    setBoardValue(Array(9).fill(null))
+    setPlayerX(false)
+    setHistory({board:[],player:[]})
+    setMoveCommand(false)
+    setWinnerState('')
+    setCounter(0)
+    // set all states to initial state values to restart the Game
+  }
   
   
   return(
@@ -84,10 +97,27 @@ import "./styles/style.scss";
       {/* // eslint-disable-next-line react/jsx-no-comment-textnodes */}
       <h1>Tic-Tac-Toe</h1>
       {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-      <h3>{winnerMessage}</h3>
+      <WinnerMsg 
+        winnerState={winnerState}
+        isplayerX={isplayerX}
+        boardLength={history.board.length}
+      />
       {/* eslint-disable-next-line no-unneeded-ternary */}
-      <Board clickHandler={clickHandler} boardValue={moveCommand ?moveCommand: boardValue} />
-      <History history={history} moveTo={moveTo} />
+      <Board
+        clickHandler={clickHandler} 
+        boardValue={moveCommand || boardValue}
+        winnerSquares={winnerSquares}
+      />
+      <button 
+        type='button'
+        onClick={newGame}
+      >
+        StartGame
+      </button>
+      <History 
+        history={history}
+        moveTo={moveTo}
+      />
     </div>
   );
 }

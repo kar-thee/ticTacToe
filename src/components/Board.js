@@ -1,14 +1,22 @@
 import React from "react";
 import Square from "./Square";
 
-const Board = ({boardValue,clickHandler}) =>{
+
+const Board = ({boardValue,clickHandler,winnerSquares}) =>{
        // eslint-disable-next-line no-console
        console.log("boardValue : ",boardValue)
-    const renderSquare = (position) =>{
+       // eslint-disable-next-line no-console
+       console.log(winnerSquares,"Winning Squares")
+
+       const renderSquare = (position) =>{    
+
+            const isWinning = winnerSquares.includes(position)
+
         return(
           <Square
             onClicking={() =>clickHandler(position)} 
             value={boardValue[position]}
+            isWinning={isWinning}
           />
             
           );

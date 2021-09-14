@@ -9,6 +9,7 @@ const History = ({history,moveTo}) => {
       <>
         <ul>
           {history.board.map( (elem,index) => {
+              // eslint-disable-next-line no-console
               console.log(history.board.length,"this is elem in history map fun")
               return(
                 
