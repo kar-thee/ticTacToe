@@ -94,30 +94,44 @@ import "./styles/style.scss";
   
   return(
     <div className="app">
-      {/* // eslint-disable-next-line react/jsx-no-comment-textnodes */}
-      <h1>Tic-Tac-Toe</h1>
-      {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+      
+      <h1>
+        Tic-
+        <span className='text-green'>Tac</span>
+        -Toe
+      </h1>
+
       <WinnerMsg 
         winnerState={winnerState}
         isplayerX={isplayerX}
         boardLength={history.board.length}
       />
-      {/* eslint-disable-next-line no-unneeded-ternary */}
+      
       <Board
         clickHandler={clickHandler} 
         boardValue={moveCommand || boardValue}
         winnerSquares={winnerSquares}
       />
+
       <button 
         type='button'
         onClick={newGame}
+        className={`btn-reset ${winnerState?'active':''}`}
       >
         StartGame
       </button>
+
+      <h2 style={{fontWeight:'normal'}}>
+        Current Game History
+      </h2>
+      
       <History 
         history={history}
         moveTo={moveTo}
       />
+
+      <div className='bg-balls' /> 
+
     </div>
   );
 }

@@ -8,11 +8,35 @@ const WinnerMsg = ({winnerState,isplayerX,boardLength}) => {
     // eslint-disable-next-line no-console
     console.log(boardLength,"boardlength")
     return (
-      <h3>
-        {winnerState && `Winner is ${winnerState}`}
-        {!winnerState && (boardLength<10) && `${isplayerX ? 'X' : 'O'}'s Turn`}
-        {(boardLength>9) && !winnerState && `X and O are Tied`}
-      </h3>
+      <div className='status-message'>
+        {winnerState && (
+        <>
+          Winner is 
+          {' '}
+          <span className={winnerState ==='X' ? "text-green" : "text-orange"}>{winnerState}</span>
+        </>
+)}
+        {!winnerState && (boardLength<10) && (
+        <>
+          Next Player is 
+          {' '}
+          <span className={isplayerX?"text-green" : "text-orange"}>
+            {isplayerX ? 'X' : 'O'}
+          </span>
+        </>
+)}
+        {(boardLength>9) && !winnerState && (
+        <>
+          <span className='text-green'>X</span>
+          {' '}
+          and
+          {' '}
+          <span className='text-orange'>O</span>
+          {' '}
+          are Tied
+        </>
+)}
+      </div>
     )
 }
 

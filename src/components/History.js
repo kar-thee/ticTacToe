@@ -6,8 +6,8 @@ const History = ({history,moveTo}) => {
     
     
     return (
-      <>
-        <ul>
+      <div className='history-wrapper'>
+        <ul className='history'>
           {history.board.map( (elem,index) => {
               // eslint-disable-next-line no-console
               console.log(history.board.length,"this is elem in history map fun")
@@ -15,14 +15,15 @@ const History = ({history,moveTo}) => {
                 
                 <li 
                   key={index}
-                  style={
-                    {listStyle:'none',padding:'3px',textAlign: (index>0)?'center':''}
-                    }
+                //   style={
+                //     {listStyle:'none',padding:'3px',textAlign: (index>0)?'center':''}
+                //     }
                 >
                   <button 
                     type="button" 
                     onClick={()=>(moveTo(index))} 
-                    style={{fontWeight:((history.board.length-1) === index) ? 'bold':''}}
+                    // style={{fontWeight:((history.board.length-1) === index) ? 'bold':''}}
+                    className={`btn-move ${((history.board.length-1) === index) ? 'active':''}`}
                   
                   >
                     {
@@ -34,7 +35,7 @@ const History = ({history,moveTo}) => {
           })}
           
         </ul>
-      </>
+      </div>
     )
 }
 
